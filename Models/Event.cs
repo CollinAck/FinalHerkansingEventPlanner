@@ -43,11 +43,13 @@ namespace FinalHerkansingEventPlanner.Models
         [Required]
         [ForeignKey("LocationChoice")]
         public int LocationChoiceId { get; set; }
+        [Display(Name = "Locatie")]
         public LocationChoice? LocationChoice { get; set; }
 
         [Required]
         [ForeignKey("CategoryChoice")]
         public int CategoryChoiceId { get; set; }
+        [Display(Name = "Categorie")]
         public CategoryChoice? CategoryChoice { get; set; }
     }
 }

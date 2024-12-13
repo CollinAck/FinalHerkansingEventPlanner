@@ -4,11 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Welkom op de eventspagina!</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    Ontdek een breed scala aan evenementen die speciaal zijn ontworpen om je te inspireren, vermaken en verbinden.
+    Van culinaire belevenissen en livemuziek tot spannende voorstellingen en sportieve uitdagingen – hier vind je voor ieder wat wils.
+    Blader door de lijst, reserveer je tickets en maak je klaar voor onvergetelijke ervaringen!
 </p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a class="btn btn-dark" asp-action="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -16,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateTime)
@@ -49,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)

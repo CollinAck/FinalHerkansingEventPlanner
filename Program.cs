@@ -91,6 +91,27 @@ namespace FinalHerkansingEventPlanner
                 }
 
             }
+            // dummy-data voor kassa-account
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+                string email = "kassa@kassa.com";
+                string password = "Kassa1234,";
+
+                if (await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new IdentityUser();
+                    user.UserName = email;
+                    user.Email = email;
+
+                    await userManager.CreateAsync(user, password);
+
+                    await userManager.AddToRoleAsync(user, "Kassa");
+                }
+
+            }
 
             app.Run();
         }

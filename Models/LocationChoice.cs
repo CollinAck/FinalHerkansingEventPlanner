@@ -7,6 +7,8 @@ namespace FinalHerkansingEventPlanner.Models
         [Key]
         public int LocationChoiceId { get; set; }
         [Required]
+        [Display(Name = "Locatie")]
+
         public string LocationChoiceName { get; set; }
 
         public ICollection<Event> Events { get; set; } = new List<Event>();
