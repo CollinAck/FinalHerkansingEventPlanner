@@ -20,10 +20,25 @@ namespace FinalHerkansingEventPlanner.Controllers
         }
 
         // GET: Events
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? category)
         {
-            var applicationDbContext = _context.Events.Include(e => e.CategoryChoice).Include(e => e.LocationChoice);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["Categories"] = _context.CategoryChoices
+            .Select(c => c.CategoryChoiceName)
+            .ToList();
+
+            var events = _context.Events
+                .Include(e => e.CategoryChoice)
+                .Include(e => e.LocationChoice)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                events = events.Where(e => e.CategoryChoice.CategoryChoiceName == category);
+            }
+
+            events = events.OrderBy(e => e.DateTime);
+
+            return View(await events.ToListAsync());
         }
 
         // GET: Events/Details/5
@@ -187,6 +202,7 @@ namespace FinalHerkansingEventPlanner.Controllers
             _context.Events.Update(@event);
             await _context.SaveChangesAsync();
 
+            TempData["SuccessMessage"] = "Ticket succesvol gereserveerd!";
             return RedirectToAction(nameof(Index));
         }
     }

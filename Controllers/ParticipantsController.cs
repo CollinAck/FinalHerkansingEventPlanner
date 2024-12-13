@@ -64,6 +64,7 @@ namespace FinalHerkansingEventPlanner.Controllers
             _context.Tickets.Remove(ticket);
             await _context.SaveChangesAsync();
 
+            TempData["CancelMessage"] = "Je reservering is succesvol geannuleerd.";
             return RedirectToAction(nameof(TicketsPerEvent), new { participantId = ticket.ParticipantId });
         }
 

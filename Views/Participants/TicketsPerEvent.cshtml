@@ -9,7 +9,13 @@
     Bekijk je reserveringen en beheer eenvoudig je deelname!
 </p>
 
-
+@if (TempData["CancelMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["CancelMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 
 @foreach (var eventGroup in Model)
 {

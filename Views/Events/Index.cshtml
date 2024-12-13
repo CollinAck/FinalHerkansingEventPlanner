@@ -11,10 +11,40 @@
     Van culinaire belevenissen en livemuziek tot spannende voorstellingen en sportieve uitdagingen – hier vind je voor ieder wat wils.
     Blader door de lijst, reserveer je tickets en maak je klaar voor onvergetelijke ervaringen!
 </p>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="CategoryFilter">Filter op categorie:</label>
+        <select id="CategoryFilter" name="category" class="form-control">
+            <option value="">-- Alle categorieën --</option>
+            @if (ViewData["Categories"] is IEnumerable<string> categories)
+            {
+                @foreach (var category in categories)
+                {
+                    <option value="@category">@category</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Filter</button>  <a class="btn btn-primary" asp-action="Index">Wis filter</a>
+
+
+</form>
+
+<br/>
+
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a class="btn btn-dark" asp-action="Create">Create New</a>
+        <a class="btn btn-secondary" asp-action="Create">Create New</a>
     </p>
 }
 <table class="table">
@@ -47,6 +77,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.CategoryChoice)
             </th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th></th> // Aangemaakt voor de admin weergave, eerste regel bij opmaak wordt de lijn NIET doorgetrokken, vanwege admin CRUD
+            }
             <th></th>
         </tr>
     </thead>
