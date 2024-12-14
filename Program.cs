@@ -25,7 +25,7 @@ namespace FinalHerkansingEventPlanner
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
-
+            builder.Services.AddSwaggerGen();
 
 
 
@@ -35,7 +35,8 @@ namespace FinalHerkansingEventPlanner
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
-
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
             else
             {
@@ -47,6 +48,11 @@ namespace FinalHerkansingEventPlanner
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Festivo");
+            });
 
             app.UseRouting();
 
