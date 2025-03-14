@@ -21,5 +21,7 @@ namespace FinalHerkansingEventPlanner.Models
 
         public Event Event { get; set; } // Een ticket voor een specefiek evenement, om relatie te leggen
         public Participant Participant { get; set; }
+
+        //DIT IS EEN VOORBEELD VOOR EEN PUSH :)
     }
 }
