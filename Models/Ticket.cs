@@ -23,5 +23,6 @@ namespace FinalHerkansingEventPlanner.Models
         public Participant Participant { get; set; }
 
         //DIT IS EEN VOORBEELD VOOR EEN PUSH :)
+        //TEST
     }
 }
